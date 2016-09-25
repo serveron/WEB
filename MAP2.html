@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
-<title>HTML 5 - Geolocation</title>
+<title>HTML5 - Geolocation</title>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
  <style>
       html, body {
@@ -14,6 +14,7 @@
         height: 100%;
       }
     </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 </head>
 <body>
  <script>
@@ -79,7 +80,44 @@
                               'Error: The Geolocation service failed.' :
                               'Error: Your browser doesn\'t support geolocation.');
       }
+
+      /*
+      var HttpClient = function() {
+          this.get = function(aUrl, aCallback) {
+              var anHttpRequest = new XMLHttpRequest();
+              anHttpRequest.onreadystatechange = function() { 
+                  if (anHttpRequest.readyState == 4 && anHttpRequest.status == 200)
+                      aCallback(anHttpRequest.responseText);
+              }
+
+              anHttpRequest.open( "GET", aUrl, true );            
+              anHttpRequest.send( null );
+          }
+      }
+      var IPINFOSERVICE = "https://ipinfo.io";
+      aClient = new HttpClient();
+      aClient.get('https://ipinfo.io', function(response) {
+          // do something with response
+          //var regex = /example-results-basic(.*)pre/g;
+          //var resp = response.match(regex);
+          //var resp = regex.exec(response);
+          //console.log(response);
+          //IPINFOSERVICE = response
+          //console.log(resp);
+      });
+      */
+      var data;
+      $.getJSON('https://ipinfo.io', function(data){
+      console.log(data)
+      window.data = data
+      setTimeout(alert(""+data.region +"\n"+ data.city +"\n"+ data.country +"\nHost_name: "+ data.hostname +"\nIP: "+ data.ip +"\nLocation: "+ data.loc), 9000);
+      
+    });
+      
     </script>
+    <!--  
+      <iframe src="https://ipinfo.io"></iframe>
+    -->
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8pgW0nXJwe06ZbI-UCsG0mkEoXD9JsGI&callback=initMap">
     </script>
